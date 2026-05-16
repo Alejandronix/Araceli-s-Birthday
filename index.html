@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recuerdos — Un lugar para los momentos que importan</title>
+
+  <!-- Tipografías de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <!-- Canvas para partículas flotantes -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- Navegación principal -->
+  <nav class="nav" role="navigation" aria-label="Navegación principal">
+    <a href="#inicio" class="nav-logo" aria-label="Inicio — Recuerdos">Recuerdos</a>
+
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" onclick="toggleMenu(this)">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#cartas">Cartas</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#momentos">Momentos</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="btn-music" id="btn-music" onclick="toggleMusic()" aria-label="Reproducir música de fondo">
+        <div class="music-bars" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <span>Música</span>
+      </button>
+
+      <button class="btn-icon" id="btn-theme" onclick="toggleTheme()" aria-label="Cambiar modo oscuro/claro">
+        🌙
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="inicio" aria-labelledby="hero-title">
+    <p class="hero-ornament">✦ un espacio de memorias ✦</p>
+
+    <h1 class="hero-title" id="hero-title">
+      Cada recuerdo es<br />
+      una <em>carta al corazón</em>
+    </h1>
+
+    <p class="hero-subtitle">
+      Un lugar íntimo donde guardar los momentos que importan,
+      las palabras que perduran y las personas que nunca olvidamos. Tu eres una de ellas.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#cartas" class="btn-primary">
+      Ver mis cartas
+      </a>
+      <button class="btn-secondary" onclick="openModal()">
+      Agregar recuerdo
+      </button>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Descubrir</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- Sección cita -->
+  <section class="quote-section" aria-label="Frase especial">
+    <div class="container">
+      <blockquote class="reveal">
+        <p class="quote-text">
+          "Los recuerdos más preciosos no se olvidan.
+          Simplemente esperan pacientemente
+          en los rincones del corazón."
+        </p>
+        <cite class="quote-author">— Para quienes guardan momentos con amor</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">· · · ♡ · · ·</div>
+
+  <!-- Sección de cartas -->
+  <section class="py-section letters-section" id="cartas" aria-labelledby="letters-title">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-label">escritas con cariño</span>
+        <h2 class="section-title" id="letters-title">Mis cartas</h2>
+        <p class="section-desc">
+          Palabras que nunca se dijeron en voz alta,
+          sentimientos que sólo el papel sabe guardar.
+        </p>
+      </header>
+
+      <div class="letters-grid" id="letters-container" role="list"></div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">· · · ✦ · · ·</div>
+
+  <!-- Sección galería -->
+  <section class="py-section" id="galeria" aria-labelledby="gallery-title">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-label">fotografías del alma</span>
+        <h2 class="section-title" id="gallery-title">Galería de recuerdos</h2>
+        <p class="section-desc">
+          Momentos congelados en el tiempo,
+          como fotografías que el corazón jamás pierde.
+        </p>
+      </header>
+
+      <div class="gallery-grid" id="gallery-container" role="list"></div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">· · · ♡ · · ·</div>
+
+  <!-- Sección línea del tiempo -->
+  <section class="py-section letters-section" id="momentos" aria-labelledby="timeline-title">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-label">el camino recorrido</span>
+        <h2 class="section-title" id="timeline-title">Momentos que definen</h2>
+        <p class="section-desc">
+          Los instantes que, sin avisar,
+          se convierten en los más importantes de nuestra historia.
+        </p>
+      </header>
+
+      <div class="timeline" id="timeline-container" role="list"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <span class="footer-logo">Recuerdos</span>
+      <p class="footer-text">
+        Hecho con amor, para que los momentos no se pierdan.
+      </p>
+      <span class="footer-hearts">♡ &nbsp; ♡ &nbsp; ♡</span>
+    </div>
+  </footer>
+
+<!-- Modal actualizado con campo de imagen -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">✕</button>
+    <h2 class="modal-title" id="modal-title">✨ Agregar un recuerdo</h2>
+
+    <div class="form-group">
+      <label class="form-label" for="memory-title">Título del recuerdo</label>
+      <input
+        class="form-input"
+        id="memory-title"
+        type="text"
+        placeholder="Ej: El día que nos conocimos..."
+      />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="memory-date">Fecha especial</label>
+      <input
+        class="form-input"
+        id="memory-date"
+        type="date"
+      />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="memory-text">Cuéntame ese momento</label>
+      <textarea
+        class="form-textarea"
+        id="memory-text"
+        placeholder="Escribe aquí lo que sientes, lo que recuerdas, lo que nunca quieres olvidar..."
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="memory-emoji">Emoji que lo representa</label>
+      <input
+        class="form-input"
+        id="memory-emoji"
+        type="text"
+        placeholder="🌸 🌟 💌 🎉 ☕ 🌙"
+        maxlength="2"
+      />
+    </div>
+
+    <!-- NUEVO: Campo para subir imagen -->
+    <div class="form-group">
+      <label class="form-label" for="memory-image">📸 Imagen del recuerdo (opcional)</label>
+      <input
+        class="form-input"
+        id="memory-image"
+        type="file"
+        accept="image/*"
+        onchange="previewImage(this)"
+        style="padding: 0.5rem;"
+      />
+      <small style="color: var(--color-text-muted); font-style: italic; display: block; margin-top: 0.25rem;">
+        Formatos aceptados: JPG, PNG, GIF, WebP
+      </small>
+      <div id="image-preview" style="margin-top: 0.75rem;"></div>
+    </div>
+
+    <button class="btn-primary" onclick="saveMemory()" style="width:100%; justify-content:center;">
+      💾 Guardar este recuerdo
+    </button>
+  </div>
+</div>
+
+  <!-- Audio -->
+    <audio id="bg-audio" loop preload="auto">
+  <source src="audio/mi-cancion.mp3" type="audio/mpeg" />
+  Tu navegador no soporta audio HTML5.
+</audio>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/music.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
